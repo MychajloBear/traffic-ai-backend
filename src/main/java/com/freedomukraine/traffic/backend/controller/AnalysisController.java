@@ -4,6 +4,7 @@ import com.freedomukraine.traffic.backend.dto.AnalysisRequest;
 import com.freedomukraine.traffic.backend.dto.AnalysisResponse;
 import com.freedomukraine.traffic.backend.service.AnalysisService;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/analysis")
@@ -11,12 +12,16 @@ public class AnalysisController {
 
     private final AnalysisService service;
 
+    private static final org.slf4j.Logger log =
+        org.slf4j.LoggerFactory.getLogger(AnalysisController.class);
+
     public AnalysisController(AnalysisService service) {
         this.service = service;
     }
 
     @PostMapping
-    public AnalysisResponse analyze(@RequestBody AnalysisRequest request) {
+    public AnalysisResponse analyzeWithLogging(@Valid @RequestBody AnalysisRequest request) {
+        log.info("POST /api/analysis received, questionText={}", request.questionText());
         return service.analyze(request.questionText());
     }
 }
