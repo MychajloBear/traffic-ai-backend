@@ -1,12 +1,14 @@
 package com.freedomukraine.traffic.backend.service;
 
 import com.freedomukraine.traffic.backend.dto.AnalysisResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AnalysisService {
-    private static final org.slf4j.Logger log =
-        org.slf4j.LoggerFactory.getLogger(AnalysisService.class);
+    private static final Logger log =
+        LoggerFactory.getLogger(AnalysisService.class);
 
     public AnalysisResponse analyze(String questionText) {
 
